@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Samir Bertel | Ingeniero de Sistemas</title>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --neon-green: #0f0;
+            --neon-pink: #f0f;
+            --neon-blue: #0ff;
+            --bg-color: #050505;
+            --glass: rgba(255, 255, 255, 0.05);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--neon-green);
+            font-family: 'VT323', monospace;
+            overflow-x: hidden;
+            font-size: 1.3rem;
+            line-height: 1.6;
+        }
+
+        /* Efecto CRT (Monitor Viejo) */
+        body::before {
+            content: " ";
+            display: block;
+            position: absolute;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            z-index: 2;
+            background-size: 100% 2px, 3px 100%;
+            pointer-events: none;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Header con Efecto Glitch */
+        header {
+            text-align: center;
+            padding: 80px 0 40px;
+            border-bottom: 2px solid var(--neon-blue);
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 4rem;
+            text-shadow: 2px 2px var(--neon-pink), -2px -2px var(--neon-blue);
+            animation: glitch 1s infinite;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            color: var(--neon-blue);
+            font-size: 1.5rem;
+            letter-spacing: 2px;
+        }
+
+        /* Secciones */
+        section {
+            margin-bottom: 60px;
+            padding: 30px;
+            border: 1px solid var(--neon-green);
+            background: var(--glass);
+            box-shadow: 0 0 15px rgba(0, 255, 0, 0.1);
+            position: relative;
+        }
+
+        section::after {
+            content: '';
+            position: absolute;
+            top: -5px; left: -5px;
+            width: 10px; height: 10px;
+            background: var(--neon-green);
+            box-shadow: 5px 5px 0 var(--neon-green); /* Esquinas retro */
+        }
+
+        h2 {
+            color: var(--neon-pink);
+            border-bottom: 1px dashed var(--neon-pink);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            font-size: 2rem;
+            display: inline-block;
+        }
+
+        /* Animación de escritura */
+        .typing-effect {
+            border-right: 3px solid var(--neon-green);
+            white-space: pre-wrap;
+            overflow: hidden;
+            animation: blink 0.75s step-end infinite;
+        }
+
+        /* Grid de Habilidades */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .skill-item {
+            border: 1px solid var(--neon-blue);
+            padding: 10px;
+            text-align: center;
+            color: var(--neon-blue);
+            transition: 0.3s;
+            cursor: crosshair;
+        }
+
+        .skill-item:hover {
+            background: var(--neon-blue);
+            color: #000;
+            box-shadow: 0 0 15px var(--neon-blue);
+        }
+
+        /* Contacto */
+        .contact-info p {
+            margin: 10px 0;
+            font-size: 1.5rem;
+        }
+        
+        .contact-info a {
+            color: var(--neon-green);
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        .contact-info a:hover {
+            text-shadow: 0 0 10px var(--neon-green);
+            text-decoration: underline;
+        }
+
+        /* Botón Flotante WhatsApp */
+        .float-wa {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #25d366;
+            color: #FFF;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.5);
+            z-index: 100;
+            transition: transform 0.3s;
+            text-decoration: none;
+            border: 2px solid #fff;
+        }
+
+        .float-wa:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px #25d366;
+        }
+
+        /* Animaciones */
+        @keyframes glitch {
+            0% { transform: translate(0) }
+            20% { transform: translate(-2px, 2px) }
+            40% { transform: translate(-2px, -2px) }
+            60% { transform: translate(2px, 2px) }
+            80% { transform: translate(2px, -2px) }
+            100% { transform: translate(0) }
+        }
+
+        @keyframes blink {
+            50% { border-color: transparent }
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            h1 { font-size: 2.5rem; }
+            .container { padding: 10px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>SAMIR BERTEL</h1>
+            <div class="subtitle">> DESARROLLO DE SOFTWARE & SOLUCIONES TI_</div>
+        </header>
+        <canvas id="matrixCanvas"></canvas>
+
+<style>
+    /* Estilos para el canvas Matrix (Fondo) */
+    #matrixCanvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 0; /* Detrás de todo */
+        width: 100%;
+        height: 100%;
+        opacity: 0.15; /* Sutil para que se lea el texto */
+        pointer-events: none;
+    }
+
+    /* Ajuste para que el contenido quede encima del canvas */
+    .container {
+        position: relative;
+        z-index: 2; 
+        background: rgba(5, 5, 5, 0.85); /* Fondo semitransparente para leer mejor */
+        box-shadow: 0 0 50px #000;
+    }
+
+    /* NUEVA SECCIÓN: SERVICIOS / TARJETAS */
+    .service-card {
+        border: 1px solid var(--neon-green);
+        background: #001100;
+        padding: 20px;
+        margin-bottom: 20px;
+        position: relative;
+        transition: 0.3s;
+    }
+
+    .service-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 5px 5px 0 var(--neon-blue);
+        border-color: var(--neon-blue);
+    }
+
+    .service-icon {
+        font-size: 2.5rem;
+        margin-bottom: 15px;
+        color: var(--neon-green);
+    }
+
+    .service-title {
+        color: #fff;
+        font-size: 1.5rem;
+        margin-bottom: 10px;
+        text-transform: uppercase;
+    }
+</style>
+
+<section id="servicios">
+    <h2>> AVAILABLE_SERVICES</h2>
+    <div class="skills-grid"> <div class="service-card">
+            <div class="service-icon"><i class="fas fa-code"></i></div>
+            <div class="service-title">Desarrollo Web</div>
+            <p>Creación de sitios web modernos, landing pages y aplicaciones web a medida.</p>
+        </div>
+
+        <div class="service-card">
+            <div class="service-icon"><i class="fas fa-database"></i></div>
+            <div class="service-title">Bases de Datos</div>
+            <p>Diseño, optimización y gestión de datos (SQL) para tu negocio.</p>
+        </div>
+
+        <div class="service-card">
+            <div class="service-icon"><i class="fas fa-laptop-code"></i></div>
+            <div class="service-title">Software a Medida</div>
+            <p>Automatización de procesos y creación de herramientas de escritorio (Java/Python).</p>
+        </div>
+
+    </div>
+</section>
+
+<script>
+    const canvas = document.getElementById('matrixCanvas');
+    const ctx = canvas.getContext('2d');
+
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+
+    const katakana = '01'; // Binario simple para efecto retro
+    const latin = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const nums = '0123456789';
+    const alphabet = katakana + latin + nums;
+
+    const fontSize = 16;
+    const columns = canvas.width/fontSize;
+
+    const rainDrops = [];
+
+    for( let x = 0; x < columns; x++ ) {
+        rainDrops[x] = 1;
+    }
+
+    const draw = () => {
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+        ctx.fillStyle = '#0F0'; // Color Verde Matrix
+        ctx.font = fontSize + 'px monospace';
+
+        for(let i = 0; i < rainDrops.length; i++) {
+            const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+            ctx.fillText(text, i*fontSize, rainDrops[i]*fontSize);
+
+            if(rainDrops[i]*fontSize > canvas.height && Math.random() > 0.975){
+                rainDrops[i] = 0;
+            }
+            rainDrops[i]++;
+        }
+    };
+
+    setInterval(draw, 30);
+
+    // Ajustar tamaño si cambian la ventana
+    window.addEventListener('resize', () => {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    });
+</script>
+
+        <section id="sobre-mi">
+            <h2>> SYSTEM_PROFILE</h2>
+            <div class="typing-effect" id="bio-text">
+                Cargando datos del usuario...
+            </div>
+            <br>
+            <p style="color: #fff; opacity: 0.8; font-size: 1rem;">
+                <i class="fas fa-medal" style="color: var(--neon-pink)"></i> Becado por Excelencia Académica (ICFES)
+            </p>
+        </section>
+
+        <section id="habilidades">
+            <h2>> INSTALLED_MODULES (SKILLS)</h2>
+            <div class="skills-grid">
+                <div class="skill-item">JAVA / PYTHON</div>
+                <div class="skill-item">JAVASCRIPT</div>
+                <div class="skill-item">SQL / BASES DE DATOS</div>
+                <div class="skill-item">GIT / GITHUB</div>
+                <div class="skill-item">SOLUCIÓN DE PROBLEMAS</div>
+                <div class="skill-item">LÓGICA MATEMÁTICA</div>
+                <div class="skill-item">DESARROLLO WEB</div>
+                <div class="skill-item">INGENIERÍA DE SW</div>
+            </div>
+        </section>
+
+        <style>
+    .methodology-box {
+        border: 2px dashed var(--neon-pink);
+        background: rgba(255, 0, 255, 0.05);
+        padding: 25px;
+        margin-bottom: 60px;
+        position: relative;
+    }
+
+    .method-badge {
+        background: var(--neon-pink);
+        color: #000;
+        padding: 5px 10px;
+        font-weight: bold;
+        display: inline-block;
+        margin-bottom: 15px;
+        font-size: 1.1rem;
+    }
+
+    .method-text {
+        color: #fff;
+        font-size: 1.4rem;
+    }
+
+    .highlight-text {
+        color: var(--neon-green);
+        text-decoration: underline;
+        text-decoration-style: wavy; /* Subrayado ondulado estilo error de código pero estético */
+    }
+    
+    .check-list {
+        list-style: none;
+        margin-top: 15px;
+    }
+    
+    .check-list li::before {
+        content: "[OK] ";
+        color: var(--neon-green);
+    }
+</style>
+
+<section id="metodologia" class="methodology-box">
+    <div class="method-badge">>> ALGORITMO EMPRENDEDOR DETECTADO</div>
+    <h2>> HUMAN_ANALYSIS_MODE</h2>
+    
+    <div class="method-text">
+        <p>
+            No desarrollo a ciegas. Mi filosofía es el <span class="highlight-text">Análisis In-Situ</span>.
+        </p>
+        <br>
+        <p>
+            Me integro en tu entorno. Me siento en el puesto de trabajo real para vivir el proceso de primera mano. 
+            Gracias a mi <strong>experiencia como emprendedor y trabajador</strong>, no solo veo líneas de código; 
+            veo dolores, cuellos de botella y pérdidas de tiempo que un programador tradicional ignoraría.
+        </p>
+        
+        <ul class="check-list">
+            <li>Identificación de necesidades reales (no supuestas).</li>
+            <li>Soluciones ajustadas al flujo de trabajo diario.</li>
+            <li>Empatía total con el usuario final.</li>
+        </ul>
+    </div>
+</section>
+        <section id="contacto">
+            <h2>> ESTABLISH_CONNECTION</h2>
+            <div class="contact-info">
+                <p><i class="fas fa-terminal"></i> Email: <a href="mailto:andresvidesbertel@gmail.com">andresvidesbertel@gmail.com</a></p>
+                <p><i class="fas fa-phone-alt"></i> Móvil: <a href="tel:+573137163216">+57 313 716 3216</a></p>
+                <p><i class="fab fa-whatsapp"></i> WhatsApp: <a href="https://wa.me/573137163216?text=Hola%20Samir,%20vi%20tu%20portafolio%20y%20me%20interesa%20hablar%20contigo." target="_blank">Iniciar Chat</a></p>
+            </div>
+        </section>
+
+        <footer style="text-align: center; font-size: 0.9rem; color: #666; margin-top: 50px; padding-bottom: 20px;">
+            <p>SYSTEM STATUS: ONLINE | © 2024 Samir Bertel Vides</p>
+        </footer>
+    </div>
+
+    <a href="https://wa.me/573137163216?text=Hola%20Samir,%20me%20gustaría%20cotizar%20un%20servicio." class="float-wa" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script>
+        // Script para efecto de escritura automática
+        const text = "Hola, soy Samir Bertel Vides.\n\nEstudiante de último semestre de Ingeniería de Sistemas.\nMe especializo en crear soluciones lógicas y eficientes.\nGracias a mi puntaje ICFES, fui becado por excelencia,\nlo que demuestra mi compromiso y disciplina con el aprendizaje.\n\n¿Listo para construir el futuro?";
+        const element = document.getElementById("bio-text");
+        let i = 0;
+
+        function typeWriter() {
+            if (i < text.length) {
+                element.innerHTML += text.charAt(i) === '\n' ? '<br>' : text.charAt(i);
+                i++;
+                setTimeout(typeWriter, 40); // Velocidad de escritura
+            }
+        }
+
+        // Iniciar animación cuando carga la página
+        window.onload = typeWriter;
+    </script>
+</body>
+</html>
